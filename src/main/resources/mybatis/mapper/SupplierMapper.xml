@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.tender_info.mapper.SupplierMapper">
+
+    <!--supplier对象的List集合-->
+    <resultMap id="supplierList" type="com.liu.tender_info.bean.Supplier">
+        <id column="supplier_id" property="supplier_id" />
+        <result column="supplier_name" property="supplier_name" />
+        <result column="supplier_location" property="supplier_location" />
+        <result column="create_time" property="create_time" />
+        <result column="type" property="type" />
+        <result column="brand" property="brand" />
+        <result column="description" property="description" />
+        <result column="blacklist" property="blacklist" />
+        <result column="cooperation_type" property="cooperation_type" />
+        <result column="comment_content" property="comment_content" />
+        <result column="supplier_iphone" property="supplier_iphone" />
+    </resultMap>
+
+    <!--通过supplier_id获得supplier信息-->
+    <select id="getSupplierById" resultType="com.liu.tender_info.bean.Supplier">
+        SELECT * FROM supplier WHERE supplier_id = #{supplier_id}
+    </select>
+
+    <!--通过supplier_id获得supplier信息-->
+    <select id="getSupplierByName" resultType="com.liu.tender_info.bean.Supplier">
+        SELECT * FROM supplier WHERE supplier_name = #{supplier_name}
+    </select>
+
+    <!--通过type获得supplier信息-->
+    <select id="getSupplierByType" resultMap="supplierList">
+        SELECT * FROM supplier WHERE type =#{type}
+    </select>
+
+    <!--通过brand获得supplier信息-->
+    <select id="getSupplierByBrand" resultMap="supplierList">
+        SELECT * FROM supplier WHERE brand =#{brand}
+    </select>
+
+    <!--通过cooperation_type获得supplier信息-->
+    <select id="getSupplierByCooperation" resultMap="supplierList">
+        SELECT * FROM supplier WHERE cooperation_type =#{cooperation_type}
+    </select>
+
+    <!--增加supplier-->
+    <insert id="addSupplier" parameterType="com.liu.tender_info.bean.Supplier">
+        INSERT INTO supplier(supplier_name,supplier_location,create_time,type,brand,description,blacklist,cooperation_type,comment_content,supplier_iphone)
+          VALUES (#{supplier_name},#{supplier_location},#{create_time},#{type},#{brand},#{description},#{blacklist},#{cooperation_type},#{comment_content},#{supplier_iphone})
+    </insert>
+
+    <!--更新supplier-->
+    <update id="updateSupplier" parameterType="com.liu.tender_info.bean.Supplier">
+        UPDATE expert SET
+        supplier_name=#{supplier_name},
+        supplier_location=#{supplier_location},
+        create_time=#{create_time},
+        type=#{type},
+        brand=#{brand},
+        description=#{description},
+        blacklist=#{blacklist},
+        cooperation_type=#{cooperation_type},
+        comment_content=#{comment_content},
+        supplier_iphone=#{supplier_iphone}
+        WHERE supplier_id=#{supplier_id}
+    </update>
+
+    <!--删除supplier-->
+    <delete id="deleteSupplier">
+         DELETE FROM supplier WHERE supplier_id=#{supplier_id}
+    </delete>
+
+
+
+</mapper>

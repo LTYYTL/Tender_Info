@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.tender_info.mapper.ProductMapper">
+
+    <resultMap id="productList" type="com.liu.tender_info.bean.Product">
+        <id column="product_id" property="product_id" />
+        <result column="product_name" property="product_name" />
+        <result column="product_type" property="product_type" />
+        <result column="product_price" property="product_price" />
+        <result column="product_number" property="product_number" />
+        <result column="product_brand" property="product_brand" />
+        <result column="product_supplierId" property="product_supplierId" />
+        <result column="product_state" property="product_state" />
+        <result column="unit" property="unit" />
+        <result column="product_description" property="product_description" />
+    </resultMap>
+
+    <!--通过product_id获得product-->
+    <select id="getProductById" resultType="com.liu.tender_info.bean.Product">
+        SELECT * FROM product WHERE product_id =#{product_id}
+    </select>
+
+    <!--通过product_name获得product-->
+    <select id="getProductByName" resultType="com.liu.tender_info.bean.Product">
+        SELECT * FROM product WHERE product_name =#{product_name}
+    </select>
+
+    <!--通过product_type获得product-->
+    <select id="getProductByType" resultMap="productList">
+        SELECT * FROM product WHERE product_type =#{product_type}
+    </select>
+
+    <!--通过product_brand获得product-->
+    <select id="getProductByBrand" resultMap="productList">
+        SELECT * FROM product WHERE product_brand =#{product_brand}
+    </select>
+    <!--通过supplier_name获得product-->
+    <select id="getProductBySupplier" resultMap="productList">
+        SELECT * FROM product WHERE product_supplierId = (SELECT sepplier_id FROM supplier WHERE supplier_name =#{supplier_name})
+    </select>
+    <!--添加product-->
+    <insert id="addProduct" parameterType="com.liu.tender_info.bean.Product">
+        INSERT INTO product(product_name,product_type,product_price,product_number,product_brand,product_supplierId,product_state,unit,product_description)
+          VALUES (#{product_name},#{product_type},#{product_price},#{product_number},#{product_brand},#{product_supplierId},#{product_state},#{unit},#{product_description})
+    </insert>
+
+    <!--更新product-->
+
+    <update id="updateExpert" parameterType="com.liu.tender_info.bean.Product">
+        UPDATE product SET
+        product_name=#{product_name},
+        product_type=#{product_type},
+        product_price=#{product_price},
+        product_number=#{product_number},
+        product_brand=#{product_brand},
+        product_supplierId=#{product_supplierId},
+        product_state=#{product_state},
+        unit=#{unit},
+        product_description=#{product_description}
+        WHERE product_id=#{product_id}
+    </update>
+
+    <!--删除product-->
+    <delete id="deleteExpert">
+        DELETE FROM product WHERE product_id=#{product_id}
+    </delete>
+</mapper>

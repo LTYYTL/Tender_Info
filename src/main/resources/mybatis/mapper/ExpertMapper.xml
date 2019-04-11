@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.tender_info.mapper.ExpertMapper">
+    <!--
+
+    public Expert getExpertById(Integer expert_id);
+
+    public Expert getExpertByName(String expert_Name);
+
+    public List<Expert> getExpertByProfession(String expert_profession);
+
+    public List<Expert> getExpertByLevel(String expert_level);
+
+    public List<Expert> getExpertByPrice(Integer min,Integer max);
+
+    public int addExpert(Expert expert);
+
+    public int updateExpert(Expert expert);
+
+    public int deleteExpert(Expert expert);
+    -->
+    <!--exper对象的List集合-->
+    <resultMap id="expertList" type="com.liu.tender_info.bean.Expert">
+        <id column="expert_id" property="expert_id" />
+        <result column="expert_name" property="expert_name" />
+        <result column="expert_profession" property="expert_profession" />
+        <result column="expert_age" property="expert_age" />
+        <result column="expert_level" property="expert_level" />
+        <result column="expert_price" property="expert_price" />
+        <result column="expert_info" property="expert_info" />
+        <result column="expert_sex" property="expert_sex" />
+        <result column="expert_iphone" property="expert_iphone" />
+        <result column="expert_state" property="expert_state" />
+    </resultMap>
+
+    <!--通过expert_id获得expert信息-->
+    <select id="getExpertById" resultType="com.liu.tender_info.bean.Expert">
+        SELECT * FROM expert WHERE expert_id =#{expert_id}
+    </select>
+
+    <!--通过expert_Name获得expert信息-->
+    <select id="getExpertByName" resultType="com.liu.tender_info.bean.Expert">
+        SELECT * FROM  expert WHERE expert_Name = #{expert_Name}
+    </select>
+
+    <!--通过expert_profession获得expert信息集合-->
+    <select id="getExpertByProfession" resultMap="expertList">
+        SELECT * FROM expert WHERE expert_profession =#{expert_profession}
+    </select>
+
+    <!--通过expert_level获得expert信息集合-->
+    <select id="getExpertByLevel" resultMap="expertList">
+        SELECT * FROM expert WHERE expert_level =#{expert_level}
+    </select>
+
+    <!--通过expert_profession获得expert信息集合-->
+    <select id="getExpertByPrice" resultMap="expertList">
+        SELECT * FROM expert WHERE expert_price BETWEEN #{min} AND #{max}
+    </select>
+
+    <!--添加Expert对象到数据库-->
+    <insert id="addExpert" parameterType="com.liu.tender_info.bean.Expert">
+          INSERT INTO expert(expert_name,expert_profession,expert_age,expert_level,expert_price,expert_info,expert_sex,expert_iphone,expert_state)
+          VALUES (#{expert_name},#{expert_profession},#{expert_age},#{expert_level},#{expert_price},#{expert_info},#{expert_sex},#{expert_iphone},#{expert_state})
+    </insert>
+
+    <!--更新Expert数据-->
+    <update id="updateExpert" parameterType="com.liu.tender_info.bean.Expert">
+        UPDATE expert SET
+        expert_name=#{expert_name},
+        expert_profession=#{expert_profession},
+        expert_age=#{expert_age},
+        expert_level=#{expert_level},
+        expert_price=#{expert_price},
+        expert_info=#{expert_info},
+        expert_sex=#{expert_sex},
+        expert_iphone=#{expert_iphone},
+        expert_state=#{expert_state}
+        WHERE expert_id=#{expert_id}
+    </update>
+
+    <!--删除Expert数据-->
+    <delete id="deleteExpert">
+        DELETE FROM expert WHERE expert_id=#{expert_id}
+    </delete>
+    <select id="getCount" resultType="int">
+        select count(*) from expert
+    </select>
+</mapper>
