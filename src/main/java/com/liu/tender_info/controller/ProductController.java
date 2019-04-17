@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ProductController {
@@ -31,6 +33,16 @@ public class ProductController {
         return  pr;
     }
 
+    @RequestMapping("/getAllProduct")
+    public Map getAllProduct(){
+        Map map = new HashMap();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",100);//条数
+        List<Product> pr = productMapper.getAllProduct();
+        map.put("data",pr);
+        return  map;
+    }
 
     @RequestMapping("/getProductByType/{product_type}")
     public List<Product> getProductByType(@PathVariable("product_type") String product_type){

@@ -17,6 +17,9 @@
         <result column="product_description" property="product_description" />
     </resultMap>
 
+    <select id="getAllProduct" resultMap="productList">
+        SELECT * FROM product
+    </select>
     <!--通过product_id获得product-->
     <select id="getProductById" resultType="com.liu.tender_info.bean.Product">
         SELECT * FROM product WHERE product_id =#{product_id}

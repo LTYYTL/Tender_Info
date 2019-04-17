@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>物料管理</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" >
+    <script src="../js/jquery-1.6.3.min.js"></script>
+    <script src="../layui/layui.js" charset="utf-8"></script>
+    <script src="../js/product.js"></script>
+</head>
+<body>
+<ul class="layui-nav" lay-filter="">
+    <li class="layui-nav-item layui-this"><a href="product.html">物料管理</a></li>
+    <li class="layui-nav-item"><a href="expert.html">专家管理</a></li>
+    <li class="layui-nav-item "><a href="supplier.html">供应商管理</a></li>
+</ul>
+<br/>
+<!--搜索框-->
+<script type="text/html" id="toolbarDemo">
+    <div class="demoTable">
+        搜索ID：
+        <div class="layui-inline">
+            <input class="layui-input" name="id" id="searchId" autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload"> 搜索</button>
+        <button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
+    </div>
+</script>
+<!--编辑框-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<table class="layui-hide" id="test"></table>
+
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="product_state" value="{{d.id}}" title="禁用" lay-filter="lockDemo" {{ d.id == 1 ? 'checked' : '' }}>
+</script>
+
+<script>
+
+</script>
+
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+</body>
+</html>

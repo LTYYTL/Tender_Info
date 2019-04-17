@@ -3,24 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liu.tender_info.mapper.ExpertMapper">
-    <!--
 
-    public Expert getExpertById(Integer expert_id);
-
-    public Expert getExpertByName(String expert_Name);
-
-    public List<Expert> getExpertByProfession(String expert_profession);
-
-    public List<Expert> getExpertByLevel(String expert_level);
-
-    public List<Expert> getExpertByPrice(Integer min,Integer max);
-
-    public int addExpert(Expert expert);
-
-    public int updateExpert(Expert expert);
-
-    public int deleteExpert(Expert expert);
-    -->
     <!--exper对象的List集合-->
     <resultMap id="expertList" type="com.liu.tender_info.bean.Expert">
         <id column="expert_id" property="expert_id" />
