@@ -1,3 +1,4 @@
+//获得所有数据
 function getAllProduct() {
     layui.use('table', function(){
         var table = layui.table
@@ -33,24 +34,37 @@ function getAllProduct() {
     });
 
     //头工具栏事件
-    table.on('toolbar(test)', function(obj){
-        var checkStatus = table.checkStatus(obj.config.id);
-        switch(obj.event){
-            case 'getCheckData':
-                var data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-                break;
-            case 'getCheckLength':
-                var data = checkStatus.data;
-                layer.msg('选中了：'+ data.length + ' 个');
-                break;
-            case 'isAll':
-                layer.msg(checkStatus.isAll ? '全选': '未全选');
-                break;
-        };
-    });
+    // table.on('toolbar(test)', function(obj){
+    //     var checkStatus = table.checkStatus(obj.config.id);
+    //     switch(obj.event){
+    //         case 'getCheckData':
+    //             var data = checkStatus.data;
+    //             layer.alert(JSON.stringify(data));
+    //             break;
+    //         case 'getCheckLength':
+    //             var data = checkStatus.data;
+    //             layer.msg('选中了：'+ data.length + ' 个');
+    //             break;
+    //         case 'isAll':
+    //             layer.msg(checkStatus.isAll ? '全选': '未全选');
+    //             break;
+    //     };
+    // });
 }
 $(document).ready(function(){
     console.log("ddd")
     getAllProduct();
+
 })
+
+//上传文件事件
+function uploadEx() {
+    console.log("ssss")
+    $('#importFile').modal('')
+    $('#importFile').modal('open')
+}
+
+
+
+
+

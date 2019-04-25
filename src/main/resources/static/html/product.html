@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <title>物料管理</title>
     <link rel="stylesheet" href="../layui/css/layui.css" >
-    <script src="../js/jquery-1.6.3.min.js"></script>
+    <link rel="stylesheet" href="../materialize/css/materialize.css">
+    <script src="../js/jquery.min.js"></script>
     <script src="../layui/layui.js" charset="utf-8"></script>
+    <script src="../materialize/js/materialize.js"></script>
     <script src="../js/product.js"></script>
 </head>
 <body>
+<!-- Modal Structure -->
+<div id="importFile" class="modal">
+    <div class="modal-content">
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="提交" class="layui-btn">
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item layui-this"><a href="product.html">物料管理</a></li>
     <li class="layui-nav-item"><a href="expert.html">专家管理</a></li>
@@ -17,13 +32,23 @@
 <br/>
 <!--搜索框-->
 <script type="text/html" id="toolbarDemo">
+    <!--工具头-->
     <div class="demoTable">
-        搜索ID：
+        <select name="searchContant" class="layui-input">
+            <option value="">请选择搜索内容</option>
+            <option value="searchId">搜索编号</option>
+            <option value="searchName">搜索物料名称</option>
+            <option value="searchType">搜索类型</option>
+            <option value="searchBrand">搜索品牌</option>
+        </select>
         <div class="layui-inline">
-            <input class="layui-input" name="id" id="searchId" autocomplete="off">
+            <input class="layui-input" name="id" id="searchText" autocomplete="off">
         </div>
-        <button class="layui-btn" data-type="reload"> 搜索</button>
-        <button class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon"></i></button>
+        <button class="layui-btn" id="searchBtn"><i class="layui-icon">&#xe615;</i>搜索</button>
+        <button class="layui-btn" id="addProduct"><i class="layui-icon">&#xe654;</i>添加</button>
+
+
+        <button class="layui-btn" id="uploadEx" onclick="uploadEx()"><i class="layui-icon">&#xe67c;</i>上传文件</button>
     </div>
 </script>
 <!--编辑框-->
@@ -32,7 +57,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-
+<!--数据表-->
 <table class="layui-hide" id="test"></table>
 
 <script type="text/html" id="checkboxTpl">
@@ -54,6 +79,7 @@
             layer.msg(elem.text());
         });
     });
+
 </script>
 </body>
 </html>
