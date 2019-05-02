@@ -1,13 +1,14 @@
 package com.liu.tender_info.mapper;
 
 import com.liu.tender_info.bean.Product;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface ProductMapper {
 
     public Product getProductById(Integer product_id);
-    public Product getProductByName(String product_name);
+    public List<Product> getProductByName(@Param("product_name") String product_name);
     public List<Product> getProductByType(String product_type);
     public List<Product> getAllProduct();
     public List<Product> getProductByBrand(String product_brand);

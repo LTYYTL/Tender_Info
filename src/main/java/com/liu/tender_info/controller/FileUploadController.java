@@ -37,7 +37,7 @@ public class FileUploadController {
 
         JaveUsePython.runPy("f:/Python/tender/readExcel.py");
 
-        return "<script>alert(\"上传成功\");setInterval(function(){location.href=\"\\html/product.html\"},100)</script>";
+        return "<script>alert(\"上传成功\");setInterval(function(){location.href=\"\\html/product.html\"},300)</script>";
 
     }
 }

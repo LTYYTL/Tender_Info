@@ -8,7 +8,7 @@ public class Product {
     private Double product_price;
     private Integer product_number;
     private String product_brand;
-    private Integer product_supplierId;
+    private String product_supplierId;
     private Integer product_state;
     private String unit;
     private String product_description;
@@ -61,11 +61,11 @@ public class Product {
         this.product_brand = product_brand;
     }
 
-    public Integer getProduct_supplierId() {
+    public String getProduct_supplierId() {
         return product_supplierId;
     }
 
-    public void setProduct_supplierId(Integer product_supplierId) {
+    public void setProduct_supplierId(String product_supplierId) {
         this.product_supplierId = product_supplierId;
     }
 
@@ -91,5 +91,21 @@ public class Product {
 
     public void setProduct_description(String product_description) {
         this.product_description = product_description;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "product_id=" + product_id +
+                ", product_name='" + product_name + '\'' +
+                ", product_type='" + product_type + '\'' +
+                ", product_price=" + product_price +
+                ", product_number=" + product_number +
+                ", product_brand='" + product_brand + '\'' +
+                ", product_supplierId=" + product_supplierId +
+                ", product_state=" + product_state +
+                ", unit='" + unit + '\'' +
+                ", product_description='" + product_description + '\'' +
+                '}';
     }
 }

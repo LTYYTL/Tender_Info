@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <title>专家管理</title>
     <link rel="stylesheet" href="../layui/css/layui.css" >
+    <link rel="stylesheet" href="../materialize/css/materialize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="../js/jquery.min.js"></script>
     <script src="../layui/layui.js" charset="utf-8"></script>
+    <script src="../materialize/js/materialize.js"></script>
+    <script src="../js/expert.js"></script>
 </head>
 <body>
 <ul class="layui-nav" lay-filter="">
@@ -12,6 +17,68 @@
     <li class="layui-nav-item layui-this"><a href="expert.html">专家管理</a></li>
     <li class="layui-nav-item "><a href="supplier.html">供应商管理</a></li>
 </ul>
+
+<div class="row">
+    <form class="col s12" action="/addProduct">
+        <div class="row">
+            <div class="input-field col s6">
+                <input  id="product_name" type="text" class="validate" name="product.product_name">
+                <label for="product_name">物料名称</label>
+            </div>
+            <div class="input-field col s6">
+                <input  id="product_type" type="text" class="validate" name="product.product_type">
+                <label for="product_type">物料类型</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s3">
+                <input  id="product_brand" type="text" class="validate" name="product.product_brand">
+                <label for="product_brand">品牌</label>
+            </div>
+            <div class="input-field col s3">
+                <input  id="product_price" type="text" class="validate" name="product.product_price">
+                <label for="product_price">物料单价</label>
+            </div>
+            <div class="input-field col s3">
+                <input  id="product_number" type="text" class="validate" name="product.product_number">
+                <label for="product_number">数量</label>
+            </div>
+            <div class="input-field col s3">
+                <input  id="unit" type="text" class="validate" name="product.unit">
+                <label for="unit">计量单位</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <input  id="product_supplierId" type="text" class="validate" name="product.product_supplierId">
+                <label for="product_supplierId">供应商</label>
+            </div>
+            <div class="input-field col s6">
+                <!--<div class="switch">-->
+                    <!--<label>-->
+                        <!--禁用-->
+                        <!--<input type="checkbox">-->
+                        <!--<span class="lever"></span>-->
+                    <!--</label>-->
+                <!--</div>-->
+                <div class="input-field col s6">
+                    <input  id="product_state" type="text" class="validate" name="product.product_state">
+                    <label for="product_state">状态</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="product_description" class="materialize-textarea" name="product.product_description"></textarea>
+                <label for="product_description">文本域</label>
+            </div>
+        </div>
+    </form>
+</div>
+
 
 
 <script>

@@ -5,13 +5,14 @@
     <title>物料管理</title>
     <link rel="stylesheet" href="../layui/css/layui.css" >
     <link rel="stylesheet" href="../materialize/css/materialize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="../js/jquery.min.js"></script>
     <script src="../layui/layui.js" charset="utf-8"></script>
     <script src="../materialize/js/materialize.js"></script>
     <script src="../js/product.js"></script>
 </head>
 <body>
-<!-- Modal Structure -->
+<!-- 上传文件弹窗 -->
 <div id="importFile" class="modal">
     <div class="modal-content">
         <form method="post" action="/upload" enctype="multipart/form-data">
@@ -23,7 +24,79 @@
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
     </div>
 </div>
+<!--添加弹窗-->
+<div id="addPro" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12" action="/addProduct">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input  id="product_name" type="text" class="validate" name="product_name">
+                        <label for="product_name">物料名称</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input  id="product_type" type="text" class="validate" name="product_type">
+                        <label for="product_type">物料类型</label>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input  id="product_brand" type="text" class="validate" name="product_brand">
+                        <label for="product_brand">品牌</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input  id="product_price" type="text" class="validate" name="product_price">
+                        <label for="product_price">物料单价</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input  id="product_number" type="text" class="validate" name="product_number">
+                        <label for="product_number">数量</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input  id="unit" type="text" class="validate" name="unit">
+                        <label for="unit">计量单位</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="product_description" class="materialize-textarea" name="product_description"></textarea>
+                        <label for="product_description">文本域</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input  id="product_supplierId" type="text" class="validate" name="product_supplierId">
+                        <label for="product_supplierId">供应商</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <!--<div class="switch">-->
+                            <!--<label>-->
+                                <!--禁用-->
+                                <!--<input type="checkbox">-->
+                                <!--<span class="lever"></span>-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <input  id="product_state" type="text" class="validate" name="product_state">
+                        <label for="product_state">状态</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <button class="btn waves-effect waves-light" type="submit">提交
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+<!--导航栏-->
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item layui-this"><a href="product.html">物料管理</a></li>
     <li class="layui-nav-item"><a href="expert.html">专家管理</a></li>
@@ -34,7 +107,7 @@
 <script type="text/html" id="toolbarDemo">
     <!--工具头-->
     <div class="demoTable">
-        <select name="searchContant" class="layui-input">
+        <select name="searchContant" id="searchContant" class="layui-input" onchange="changeVl()">
             <option value="">请选择搜索内容</option>
             <option value="searchId">搜索编号</option>
             <option value="searchName">搜索物料名称</option>
@@ -42,10 +115,10 @@
             <option value="searchBrand">搜索品牌</option>
         </select>
         <div class="layui-inline">
-            <input class="layui-input" name="id" id="searchText" autocomplete="off">
+            <input class="layui-input" name="searchText" id="searchText" autocomplete="off">
         </div>
-        <button class="layui-btn" id="searchBtn"><i class="layui-icon">&#xe615;</i>搜索</button>
-        <button class="layui-btn" id="addProduct"><i class="layui-icon">&#xe654;</i>添加</button>
+        <button class="layui-btn" id="searchBtn" onclick="searchProduct()"><i class="layui-icon">&#xe615;</i>搜索</button>
+        <button class="layui-btn" id="addProduct" onclick="addProduct()"><i class="layui-icon">&#xe654;</i>添加</button>
 
 
         <button class="layui-btn" id="uploadEx" onclick="uploadEx()"><i class="layui-icon">&#xe67c;</i>上传文件</button>

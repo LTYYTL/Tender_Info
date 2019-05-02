@@ -26,8 +26,8 @@
     </select>
 
     <!--通过product_name获得product-->
-    <select id="getProductByName" resultType="com.liu.tender_info.bean.Product">
-        SELECT * FROM product WHERE product_name =#{product_name}
+    <select id="getProductByName" resultMap="productList">
+        SELECT * FROM product WHERE product_name LIKE '%${product_name}%'
     </select>
 
     <!--通过product_type获得product-->
