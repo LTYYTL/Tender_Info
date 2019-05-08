@@ -70,4 +70,6 @@ public interface ExpertMapper {
     public int deleteExpert(Integer expert_id);
 
     public int getCount();
+
+    public List<Expert> getAllExpert();
 }

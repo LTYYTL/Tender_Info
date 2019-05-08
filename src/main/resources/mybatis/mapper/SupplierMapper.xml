@@ -19,6 +19,9 @@
         <result column="supplier_iphone" property="supplier_iphone" />
     </resultMap>
 
+    <select id="getAllSupplier" resultMap="supplierList">
+        SELECT * FROM supplier
+    </select>
     <!--通过supplier_id获得supplier信息-->
     <select id="getSupplierById" resultType="com.liu.tender_info.bean.Supplier">
         SELECT * FROM supplier WHERE supplier_id = #{supplier_id}
@@ -31,12 +34,12 @@
 
     <!--通过type获得supplier信息-->
     <select id="getSupplierByType" resultMap="supplierList">
-        SELECT * FROM supplier WHERE type =#{type}
+        SELECT * FROM supplier WHERE type LIKE '%${type}%'
     </select>
 
     <!--通过brand获得supplier信息-->
     <select id="getSupplierByBrand" resultMap="supplierList">
-        SELECT * FROM supplier WHERE brand =#{brand}
+        SELECT * FROM supplier WHERE brand LIKE '%${brand}%'
     </select>
 
     <!--通过cooperation_type获得supplier信息-->
@@ -46,22 +49,20 @@
 
     <!--增加supplier-->
     <insert id="addSupplier" parameterType="com.liu.tender_info.bean.Supplier">
-        INSERT INTO supplier(supplier_name,supplier_location,create_time,type,brand,description,blacklist,cooperation_type,comment_content,supplier_iphone)
-          VALUES (#{supplier_name},#{supplier_location},#{create_time},#{type},#{brand},#{description},#{blacklist},#{cooperation_type},#{comment_content},#{supplier_iphone})
+        INSERT INTO supplier(supplier_name,supplier_location,type,brand,description,blacklist,cooperation_type,supplier_iphone)
+          VALUES (#{supplier_name},#{supplier_location},#{type},#{brand},#{description},#{blacklist},#{cooperation_type},#{supplier_iphone})
     </insert>
 
     <!--更新supplier-->
     <update id="updateSupplier" parameterType="com.liu.tender_info.bean.Supplier">
-        UPDATE expert SET
+        UPDATE supplier SET
         supplier_name=#{supplier_name},
         supplier_location=#{supplier_location},
-        create_time=#{create_time},
         type=#{type},
         brand=#{brand},
         description=#{description},
         blacklist=#{blacklist},
         cooperation_type=#{cooperation_type},
-        comment_content=#{comment_content},
         supplier_iphone=#{supplier_iphone}
         WHERE supplier_id=#{supplier_id}
     </update>

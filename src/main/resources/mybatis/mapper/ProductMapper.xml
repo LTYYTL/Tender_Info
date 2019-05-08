@@ -51,7 +51,7 @@
 
     <!--更新product-->
 
-    <update id="updateExpert" parameterType="com.liu.tender_info.bean.Product">
+    <update id="updateProduct" parameterType="com.liu.tender_info.bean.Product">
         UPDATE product SET
         product_name=#{product_name},
         product_type=#{product_type},
@@ -66,7 +66,7 @@
     </update>
 
     <!--删除product-->
-    <delete id="deleteExpert">
+    <delete id="deleteProduct">
         DELETE FROM product WHERE product_id=#{product_id}
     </delete>
 </mapper>

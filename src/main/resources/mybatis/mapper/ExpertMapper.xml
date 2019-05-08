@@ -18,6 +18,10 @@
         <result column="expert_state" property="expert_state" />
     </resultMap>
 
+    <select id="getAllExpert" resultMap="expertList">
+        SELECT * FROM expert
+    </select>
+
     <!--通过expert_id获得expert信息-->
     <select id="getExpertById" resultType="com.liu.tender_info.bean.Expert">
         SELECT * FROM expert WHERE expert_id =#{expert_id}

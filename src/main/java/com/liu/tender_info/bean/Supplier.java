@@ -7,13 +7,11 @@ public class Supplier {
     private Integer supplier_id;
     private String supplier_name;
     private String supplier_location;
-    private Date create_time;
     private String type;
     private String brand;
     private String description;
     private Integer blacklist;
     private String cooperation_type;
-    private String comment_content;
     private Integer supplier_iphone;
 
     public Integer getSupplier_iphone() {
@@ -48,13 +46,6 @@ public class Supplier {
         this.supplier_location = supplier_location;
     }
 
-    public Date getCreate_time() {
-        return create_time;
-    }
-
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
-    }
 
     public String getType() {
         return type;
@@ -96,11 +87,18 @@ public class Supplier {
         this.cooperation_type = cooperation_type;
     }
 
-    public String getComment_content() {
-        return comment_content;
-    }
-
-    public void setComment_content(String comment_content) {
-        this.comment_content = comment_content;
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "supplier_id=" + supplier_id +
+                ", supplier_name='" + supplier_name + '\'' +
+                ", supplier_location='" + supplier_location + '\'' +
+                ", type='" + type + '\'' +
+                ", brand='" + brand + '\'' +
+                ", description='" + description + '\'' +
+                ", blacklist=" + blacklist +
+                ", cooperation_type='" + cooperation_type + '\'' +
+                ", supplier_iphone=" + supplier_iphone +
+                '}';
     }
 }

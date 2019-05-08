@@ -15,7 +15,7 @@
 <!-- 上传文件弹窗 -->
 <div id="importFile" class="modal">
     <div class="modal-content">
-        <form method="post" action="/upload" enctype="multipart/form-data">
+        <form method="post" action="/uploadProduct" enctype="multipart/form-data">
             <input type="file" name="file">
             <input type="submit" value="提交" class="layui-btn">
         </form>
@@ -81,7 +81,7 @@
                             <!--</label>-->
                         <!--</div>-->
                         <input  id="product_state" type="text" class="validate" name="product_state">
-                        <label for="product_state">状态</label>
+                        <label for="product_state">状态（禁用：1）</label>
                     </div>
                     <div class="input-field col s4">
                         <button class="btn waves-effect waves-light" type="submit">提交
@@ -96,6 +96,85 @@
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
     </div>
 </div>
+
+<!--更新弹窗-->
+<div id="updatePro" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12" action="/updateProduct">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input disabled placeholder="物料编号"  id="update_products_id" type="text" class="validate" name="update_product_id">
+                        <input style="display: none" placeholder="物料编号"  id="update_product_id" type="text" class="validate" name="product_id">
+                        <label  for="update_product_id">物料编号</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input  placeholder="物料名称" id="update_product_name" type="text" class="validate" name="product_name">
+                        <label  for="update_product_name">物料名称</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input  placeholder="物料类型" id="update_product_type" type="text" class="validate" name="product_type">
+                        <label for="product_type">物料类型</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input placeholder="品牌" id="update_product_brand" type="text" class="validate" name="product_brand">
+                        <label for="product_brand">品牌</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="物料单位" id="update_product_price" type="text" class="validate" name="product_price">
+                        <label for="product_price">物料单价</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="数量" id="update_product_number" type="text" class="validate" name="product_number">
+                        <label for="product_number">数量</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="计量单位" id="update_unit" type="text" class="validate" name="unit">
+                        <label for="unit">计量单位</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea placeholder="描述" id="update_product_description" class="materialize-textarea" name="product_description"></textarea>
+                        <label for="product_description">描述</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input placeholder="供应商名称" id="update_product_supplierId" type="text" class="validate" name="product_supplierId">
+                        <label for="product_supplierId">供应商</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <!--<div class="switch">-->
+                        <!--<label>-->
+                        <!--禁用-->
+                        <!--<input type="checkbox">-->
+                        <!--<span class="lever"></span>-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        <input placeholder="状态" id="update_product_state" type="text" class="validate" name="product_state">
+                        <label for="product_state">状态（禁用：1）</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <button class="btn waves-effect waves-light" type="submit">提交
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+
 <!--导航栏-->
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item layui-this"><a href="product.html">物料管理</a></li>
@@ -131,16 +210,13 @@
 </script>
 
 <!--数据表-->
-<table class="layui-hide" id="test"></table>
+<table class="layui-hide" id="test" lay-filter="test"></table>
 
 <script type="text/html" id="checkboxTpl">
     <!-- 这里的 checked 的状态只是演示 -->
-    <input type="checkbox" name="product_state" value="{{d.id}}" title="禁用" lay-filter="lockDemo" {{ d.id == 1 ? 'checked' : '' }}>
+    <input type="checkbox" name="product_state" value="{{d.product_state}}" title="禁用" lay-filter="lockDemo" {{ d.product_state == 1 ? 'checked' : '' }} disabled>
 </script>
 
-<script>
-
-</script>
 
 <script>
     layui.use('element', function(){
@@ -151,6 +227,7 @@
             //console.log(elem)
             layer.msg(elem.text());
         });
+
     });
 
 </script>

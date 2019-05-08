@@ -188,12 +188,15 @@ public class ProductController {
     }
 
     @RequestMapping("/updateProduct")
-    public int updateProduct(Product product){
-        return productMapper.updateProduct(product);
+    public String updateProduct(Product product){
+        System.out.println(product.toString());
+        productMapper.updateProduct(product);
+        return "<script>alert(\"更新成功\");setInterval(function(){location.href=\"\\html/product.html\"},100)</script>";
     }
 
-    @RequestMapping("/deleteProduct/{product_id}")
-    public int deleteProduct(Integer product_id){
+    @RequestMapping("/deleteProduct")
+    public int deleteProduct(@RequestParam("product_id")Integer product_id){
+        System.out.println(product_id);
         return productMapper.deleteProduct(product_id);
     }
 

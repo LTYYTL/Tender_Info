@@ -5,18 +5,209 @@
     <title>供应商管理</title>
     <link rel="stylesheet" href="../layui/css/layui.css" >
     <link rel="stylesheet" href="../materialize/css/materialize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="../js/jquery.min.js"></script>
     <script src="../layui/layui.js" charset="utf-8"></script>
     <script src="../materialize/js/materialize.js"></script>
     <script src="../js/supplier.js"></script>
 </head>
 <body>
+<!-- 上传文件弹窗 -->
+<div id="importFile" class="modal">
+    <div class="modal-content">
+        <form method="post" action="/uploadSupplier" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="提交" class="layui-btn">
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+<!--添加弹窗-->
+<div id="addSup" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12" action="/addSupplier">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input  id="supplier_name" type="text" class="validate" name="supplier_name">
+                        <label for="supplier_name">供应商名称</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input  id="cooperation_type" type="text" class="validate" name="cooperation_type">
+                        <label for="cooperation_type">合作类型</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s2">
+                        <input  id="supplier_iphone" type="text" class="validate" name="supplier_iphone">
+                        <label for="supplier_iphone">联系电话</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input  id="brand" type="text" class="validate" name="brand">
+                        <label for="brand">品牌</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input  id="type" type="text" class="validate" name="type">
+                        <label for="type">供应类型</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="description" class="materialize-textarea" name="description"></textarea>
+                        <label for="description">描述</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input  id="supplier_location" type="text" class="validate" name="supplier_location">
+                        <label for="supplier_location">行政地址</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <!--<div class="switch">-->
+                        <!--<label>-->
+                        <!--禁用-->
+                        <!--<input type="checkbox">-->
+                        <!--<span class="lever"></span>-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        <input  id="blacklist" type="text" class="validate" name="blacklist">
+                        <label for="blacklist">状态（禁用：1）</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <button class="btn waves-effect waves-light" type="submit">提交
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+
+<!--更新弹窗-->
+<div id="updateSup" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12" action="/updateSupplier">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input disabled placeholder="供应商编号"  id="update_suppliers_id" type="text" class="validate" name="update_supplier_id">
+                        <input style="display: none" placeholder="供应商编号"  id="update_supplier_id" type="text" class="validate" name="supplier_id">
+                        <label  for="update_supplier_id">物料编号</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input  placeholder="供应商名称" id="update_supplier_name" type="text" class="validate" name="supplier_name">
+                        <label  for="update_supplier_name">供应商名称</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input  placeholder="合作类型" id="update_cooperation_type" type="text" class="validate" name="cooperation_type">
+                        <label for="cooperation_type">合作类型</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s2">
+                        <input placeholder="手机号" id="update_supplier_iphone" type="text" class="validate" name="supplier_iphone">
+                        <label for="supplier_iphone">手机号</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input placeholder="品牌" id="update_brand" type="text" class="validate" name="brand">
+                        <label for="brand">品牌</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="供应类型" id="update_type" type="text" class="validate" name="type">
+                        <label for="type">供应类型</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea placeholder="描述" id="update_description" class="materialize-textarea" name="description"></textarea>
+                        <label for="description">描述</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="供应商名称" id="update_supplier_location" type="text" class="validate" name="supplier_location">
+                        <label for="supplier_location">供应商</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <!--<div class="switch">-->
+                        <!--<label>-->
+                        <!--禁用-->
+                        <!--<input type="checkbox">-->
+                        <!--<span class="lever"></span>-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        <input placeholder="状态" id="update_blacklist" type="text" class="validate" name="blacklist">
+                        <label for="blacklist">状态（禁用：1）</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <button class="btn waves-effect waves-light" type="submit">提交
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+
+<!--导航栏-->
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item "><a href="product.html">物料管理</a></li>
     <li class="layui-nav-item"><a href="expert.html">专家管理</a></li>
     <li class="layui-nav-item layui-this"><a href="supplier.html">供应商管理</a></li>
 </ul>
+<!--搜索框-->
+<script type="text/html" id="toolbarDemo">
+    <!--工具头-->
+    <div class="demoTable">
+        <select name="searchContant" id="searchContant" class="layui-input" onchange="changeVl()">
+            <option value="">请选择搜索内容</option>
+            <option value="searchId">搜索编号</option>
+            <option value="searchName">搜索名称</option>
+            <option value="searchType">搜索供货类型</option>
+            <option value="searchBrand">搜索供货品牌</option>
+            <option value="searchCooperation">搜索合作类型</option>
+        </select>
+        <div class="layui-inline">
+            <input class="layui-input" name="searchText" id="searchText" autocomplete="off">
+        </div>
+        <button class="layui-btn" id="searchBtn" onclick="searchSupplier()"><i class="layui-icon">&#xe615;</i>搜索</button>
+        <button class="layui-btn" id="addProduct" onclick="addSupplier()"><i class="layui-icon">&#xe654;</i>添加</button>
 
+
+        <button class="layui-btn" id="uploadEx" onclick="uploadEx()"><i class="layui-icon">&#xe67c;</i>上传文件</button>
+    </div>
+</script>
+<!--编辑框-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<!--数据表-->
+<table class="layui-hide" id="test" lay-filter="test"></table>
+
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="blacklist" value="{{d.blacklist}}" title="禁用" lay-filter="lockDemo" {{ d.blacklist == 1 ? 'checked' : '' }} disabled>
+</script>
 
 <script>
     layui.use('element', function(){

@@ -12,73 +12,211 @@
     <script src="../js/expert.js"></script>
 </head>
 <body>
+
+<!-- 上传文件弹窗 -->
+<div id="importFile" class="modal">
+    <div class="modal-content">
+        <form method="post" action="/uploadExpert" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="提交" class="layui-btn">
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+<!--添加弹窗-->
+<div id="addExp" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12" action="/addExpert">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input  id="expert_name" type="text" class="validate" name="expert_name">
+                        <label for="expert_name">专家名称</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input  id="expert_profession" type="text" class="validate" name="expert_profession">
+                        <label for="expert_profession">专业</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input  id="expert_age" type="text" class="validate" name="expert_age">
+                        <label for="expert_age">年龄</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input  id="expert_sex" type="text" class="validate" name="expert_sex">
+                        <label for="expert_sex">性别</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input  id="expert_iphone" type="text" class="validate" name="expert_iphone">
+                        <label for="expert_iphone">专家电话</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input  id="expert_price" type="text" class="validate" name="expert_price">
+                        <label for="expert_price">费用</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="expert_info" class="materialize-textarea" name="expert_info"></textarea>
+                        <label for="expert_info">专家信息</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input  id="expert_level" type="text" class="validate" name="expert_level">
+                        <label for="expert_level">级别</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <!--<div class="switch">-->
+                        <!--<label>-->
+                        <!--禁用-->
+                        <!--<input type="checkbox">-->
+                        <!--<span class="lever"></span>-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        <input  id="expert_state" type="text" class="validate" name="expert_state">
+                        <label for="expert_state">状态（禁用：1）</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <button class="btn waves-effect waves-light" type="submit">提交
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+
+<!--更新弹窗-->
+<div id="updateExp" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12" action="/updateExpert">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input disabled placeholder="专家编号"  id="update_experts_id" type="text" class="validate" name="update_expert_id">
+                        <input style="display: none" placeholder="专家编号"  id="update_expert_id" type="text" class="validate" name="expert_id">
+                        <label  for="update_expert_id">专家编号</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input  placeholder="专家姓名" id="update_expert_name" type="text" class="validate" name="expert_name">
+                        <label  for="update_expert_name">专家姓名</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input  placeholder="专业" id="update_expert_profession" type="text" class="validate" name="expert_profession">
+                        <label for="expert_profession">专业</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input placeholder="年龄" id="update_expert_age" type="text" class="validate" name="expert_age">
+                        <label for="expert_age">年龄</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="性别" id="update_expert_sex" type="text" class="validate" name="expert_sex">
+                        <label for="expert_sex">性别</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="手机号" id="update_expert_iphone" type="text" class="validate" name="expert_iphone">
+                        <label for="expert_iphone">手机号</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input placeholder="费用" id="update_expert_price" type="text" class="validate" name="expert_price">
+                        <label for="expert_price">费用</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea placeholder="专家信息" id="update_expert_info" class="materialize-textarea" name="expert_info"></textarea>
+                        <label for="expert_info">专家信息</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input placeholder="级别" id="update_expert_level" type="text" class="validate" name="expert_level">
+                        <label for="expert_level">级别</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <!--<div class="switch">-->
+                        <!--<label>-->
+                        <!--禁用-->
+                        <!--<input type="checkbox">-->
+                        <!--<span class="lever"></span>-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        <input placeholder="状态" id="update_expert_state" type="text" class="validate" name="expert_state">
+                        <label for="expert_state">状态（禁用：1）</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <button class="btn waves-effect waves-light" type="submit">提交
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+    </div>
+</div>
+<!--导航栏-->
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item "><a href="product.html">物料管理</a></li>
     <li class="layui-nav-item layui-this"><a href="expert.html">专家管理</a></li>
     <li class="layui-nav-item "><a href="supplier.html">供应商管理</a></li>
 </ul>
 
-<div class="row">
-    <form class="col s12" action="/addProduct">
-        <div class="row">
-            <div class="input-field col s6">
-                <input  id="product_name" type="text" class="validate" name="product.product_name">
-                <label for="product_name">物料名称</label>
-            </div>
-            <div class="input-field col s6">
-                <input  id="product_type" type="text" class="validate" name="product.product_type">
-                <label for="product_type">物料类型</label>
-            </div>
+<br/>
+<!--搜索框-->
+<script type="text/html" id="toolbarDemo">
+    <!--工具头-->
+    <div class="demoTable">
+        <select name="searchContant" id="searchContant" class="layui-input" onchange="changeVl()">
+            <option value="">请选择搜索内容</option>
+            <option value="searchId">搜索编号</option>
+            <option value="searchName">搜索专家姓名</option>
+            <option value="searchProfession">搜索专业</option>
+            <option value="searchLevel">搜索级别</option>
+        </select>
+        <div class="layui-inline">
+            <input class="layui-input" name="searchText" id="searchText" autocomplete="off">
         </div>
+        <button class="layui-btn" id="searchBtn" onclick="searchExpert()"><i class="layui-icon">&#xe615;</i>搜索</button>
+        <button class="layui-btn" id="addProduct" onclick="addExpert()"><i class="layui-icon">&#xe654;</i>添加</button>
 
-        <div class="row">
-            <div class="input-field col s3">
-                <input  id="product_brand" type="text" class="validate" name="product.product_brand">
-                <label for="product_brand">品牌</label>
-            </div>
-            <div class="input-field col s3">
-                <input  id="product_price" type="text" class="validate" name="product.product_price">
-                <label for="product_price">物料单价</label>
-            </div>
-            <div class="input-field col s3">
-                <input  id="product_number" type="text" class="validate" name="product.product_number">
-                <label for="product_number">数量</label>
-            </div>
-            <div class="input-field col s3">
-                <input  id="unit" type="text" class="validate" name="product.unit">
-                <label for="unit">计量单位</label>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="input-field col s6">
-                <input  id="product_supplierId" type="text" class="validate" name="product.product_supplierId">
-                <label for="product_supplierId">供应商</label>
-            </div>
-            <div class="input-field col s6">
-                <!--<div class="switch">-->
-                    <!--<label>-->
-                        <!--禁用-->
-                        <!--<input type="checkbox">-->
-                        <!--<span class="lever"></span>-->
-                    <!--</label>-->
-                <!--</div>-->
-                <div class="input-field col s6">
-                    <input  id="product_state" type="text" class="validate" name="product.product_state">
-                    <label for="product_state">状态</label>
-                </div>
-            </div>
-        </div>
+        <button class="layui-btn" id="uploadEx" onclick="uploadEx()"><i class="layui-icon">&#xe67c;</i>上传文件</button>
+    </div>
+</script>
+<!--编辑框-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="product_description" class="materialize-textarea" name="product.product_description"></textarea>
-                <label for="product_description">文本域</label>
-            </div>
-        </div>
-    </form>
-</div>
+<!--数据表-->
+<table class="layui-hide" id="test" lay-filter="test"></table>
 
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="expert_state" value="{{d.expert_state}}" title="禁用" lay-filter="lockDemo" {{ d.expert_state == 1 ? 'checked' : '' }} disabled>
+</script>
 
 
 <script>
